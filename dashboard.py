@@ -14,7 +14,7 @@ import matplotlib.pyplot as plt
 import seaborn as sns
 from PIL import Image
 
-df = pd.read_csv("banking-opc.herokuapp.com/api_sample.csv")
+df = pd.read_csv("https://banking-opc.herokuapp.com/api_sample.csv")
 dframe = df.drop('target', axis=1)
 
 if 'clicked' not in st.session_state:
@@ -42,8 +42,8 @@ shap_data = 'shap_values_0.p'
 shap_values = pickle.load(open(shap_data, 'rb'))
 
 # Image features globales
-image_url = r"C:\Users\Damien\Desktop\Data Scientist\P7\\Images\dash3.png"
-image_url2 = r"C:\Users\Damien\Desktop\Data Scientist\P7\\Images\shap_importance.png"
+image_url = "https://banking-opc.herokuapp.com/images/dash3.png"
+image_url2 = "https://banking-opc.herokuapp.com/images/shap_importance.png"
 image_logo = Image.open(image_url)
 image_shap = Image.open(image_url2)
 st.image(image_logo)
@@ -66,7 +66,7 @@ if st.button('Envoyez') or st.session_state.clicked:
     client_id = int(client_id)
     print(client_id)
     try: 
-        URL = "http://127.0.0.1:5000/predict"
+        URL = "https://banking-opc.herokuapp.com/predict"
         #DICT
         #PARAMS = {'ID': client_id}
         #print(PARAMS)
