@@ -1,6 +1,5 @@
 pandas
 shap
-pickle
 numpy
 plotly.graph_objs
 matplotlib.pyplot
