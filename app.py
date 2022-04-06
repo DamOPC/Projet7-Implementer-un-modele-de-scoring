@@ -10,7 +10,7 @@ app = Flask(__name__)
 
 # Datas/Variables
 URL = "http://127.0.0.1:5000/"
-dframe = pd.read_csv(r"C:\Users\Damien\Desktop\Data Scientist\P7\Dataset\modifie\api_sample.csv")
+dframe = pd.read_csv("api_sample.csv")
 df = dframe.drop('target', axis=1)
 model = 'lgbm_test_model.sav'
 estimator = pickle.load(open(model, 'rb'))
