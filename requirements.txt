@@ -3,6 +3,5 @@ gunicorn
 django-heroku
 flask
 pandas
-pickle
 imblearn
 sklearn
