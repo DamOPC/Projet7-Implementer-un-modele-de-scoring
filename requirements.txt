@@ -5,3 +5,4 @@ flask
 pandas
 imblearn
 sklearn
+postgresql-devel
