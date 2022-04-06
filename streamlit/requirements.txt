@@ -1,4 +1,4 @@
 pandas
 shap
 numpy
-plotly.graph_objs
+plotly
