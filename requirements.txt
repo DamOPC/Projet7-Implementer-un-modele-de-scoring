@@ -1,4 +1,5 @@
 django
+streamlit
 gunicorn
 django-heroku
 flask
