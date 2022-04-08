@@ -6,3 +6,4 @@ flask
 pandas
 imblearn
 sklearn
+lightgbm
