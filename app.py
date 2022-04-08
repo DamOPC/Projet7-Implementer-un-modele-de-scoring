@@ -63,4 +63,4 @@ def shap():
 #lancement de l'application
 if __name__ == "__main__":
     print("Starting Python Flask server")
-    app.run(debug=False)
+    app.run_server(debug=False)
