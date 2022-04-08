@@ -4,6 +4,7 @@ import pandas as pd
 import json
 import pickle
 import requests
+import urllib.request
 
 # App config.
 app = Flask(__name__)
@@ -16,8 +17,7 @@ model = URL + 'lgbm_test_model.sav'
 # Variables
 dframe = pd.read_csv(data, sep=',')
 df = dframe.drop('target', axis=1)
-estimator = pickle.load(open(model, 'rb'))
-
+estimator = pickle.load(urllib.request.urlopen(model))
 
 # Routes test
 @app.route("/", methods=["POST"])
