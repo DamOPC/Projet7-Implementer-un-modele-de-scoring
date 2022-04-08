@@ -8,11 +8,14 @@ import requests
 # App config.
 app = Flask(__name__)
 
-# Datas/Variables
-URL = "http://127.0.0.1:5000/"
-dframe = pd.read_csv("api_sample.csv")
+# Datas
+URL = 'https://raw.githubusercontent.com/DamOPC/Projet7/main'
+data = URL + 'api_sample.csv'
+model = URL + 'lgbm_test_model.sav'
+
+# Variables
+dframe = pd.read_csv(data, sep=',')
 df = dframe.drop('target', axis=1)
-model = 'lgbm_test_model.sav'
 estimator = pickle.load(open(model, 'rb'))
 
 
@@ -20,12 +23,6 @@ estimator = pickle.load(open(model, 'rb'))
 @app.route("/", methods=["POST"])
 def hello():
     return("<h1>Welcome!!<h1>", 200)
-
-# Routes ping
-@app.route("/ping", methods=["POST"])
-def ping():
-    response = requests.get(URL + "ping")
-    return("status code:", response.status_code)
 
 # Routes clients IDs
 @app.route("/sku", methods=["POST"])
