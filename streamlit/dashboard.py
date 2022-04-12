@@ -78,8 +78,8 @@ if st.button('Envoyez') or st.session_state.clicked:
         #JSON
         pydict = {'ID': client_id}
         jsondata = json.dumps(pydict)
-        #print(jsondata)
-        #print(type(jsondata))
+        print(jsondata)
+        print(type(jsondata))
         r = requests.post(url=URL, data=jsondata)
         proba = float(r.text)
         #st.write(r.text)
