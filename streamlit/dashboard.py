@@ -56,7 +56,7 @@ st.subheader("1. Prédictions de scoring client et comparaison à l'ensemble des
 #st.write(chaine)
 
 #client_IDs = requests.get(url="https://banking-opc.herokuapp.com/ids")
-client_IDs = requests.request(method='GET', "https://banking-opc.herokuapp.com/ids")
+client_IDs = requests.request(method='GET', url="https://banking-opc.herokuapp.com/ids")
 #did = json.loads(client_IDs.text)
 ID_dict = client_IDs.json()
 IDs = list(ID_dict.values())
