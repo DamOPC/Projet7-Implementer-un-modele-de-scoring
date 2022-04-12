@@ -81,7 +81,8 @@ if st.button('Envoyez') or st.session_state.clicked:
         print(jsondata)
         print(type(jsondata))
         r = requests.post(url=URL, data=jsondata)
-        proba = float(r.text)
+        proba = float(response.json()['pred'])
+        #proba = float(r.text)
         #st.write(r.text)
     except:
         st.write("Wrong")
