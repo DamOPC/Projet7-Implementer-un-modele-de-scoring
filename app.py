@@ -5,6 +5,7 @@ import json
 import pickle
 import requests
 import urllib.request
+import shap
 
 # App config.
 app = Flask(__name__)
@@ -15,19 +16,22 @@ data = URL + 'api_sample.csv'
 model = URL + 'lgbm_test_model.sav'
 
 # Variables
-dframe = pd.read_csv(data, sep=',')
-df = dframe.drop('target', axis=1)
+df = pd.read_csv(data, sep=',').drop('target', axis=1).sort_values(by='SK_ID_CURR')
 estimator = pickle.load(urllib.request.urlopen(model))
+#shap_values = 
 
-# Routes test
-@app.route("/", methods=["POST"])
-def hello():
-    return("<h1>Welcome!!<h1>", 200)
+# Routes features
+@app.route("/features", methods=["GET"])
+def return_features():
+    features = list(df.columns).to_json()
+    return features
 
 # Routes clients IDs
-@app.route("/sku", methods=["POST"])
-def sku():
-    return("status code:", bim)
+@app.route("/ids", methods=["GET"])
+def return_ids():
+    ids = df['SK_ID_CURR']
+    client_ids = ids.to_json()
+    return client_ids
 
 # Routes prediction
 @app.route("/predict", methods=["POST"])
