@@ -30,7 +30,7 @@ def return_features():
 @app.route("/ids", methods=["GET"])
 def return_ids():
     ids = df['sk_id_curr']
-    client_ids = ids.to_json()
+    client_ids = ids.to_json(orient='records')
     return client_ids
 
 # Routes prediction
