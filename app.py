@@ -11,7 +11,7 @@ import shap
 app = Flask(__name__)
 
 # Datas
-URL = 'https://github.com/DamOPC/Projet7'
+URL = 'https://raw.githubusercontent.com/DamOPC/Projet7/main/'
 data = URL + 'api_sample.csv'
 model = URL + 'lgbm_test_model.sav'
 
