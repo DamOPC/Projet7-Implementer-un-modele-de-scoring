@@ -51,14 +51,14 @@ def st_shap(plot, height=None):
 #affichage formulaire
 st.title('Dashboard Scoring Credit')
 st.subheader("1. Prédictions de scoring client et comparaison à l'ensemble des clients")
-id_input = st.text_input('Veuillez saisir l\'identifiant d\'un client:', )
+#id_input = st.text_input('Veuillez saisir l\'identifiant d\'un client:', )
 #chaine = "l'id Saisi est " + str(id_input)
 #st.write(chaine)
 
 client_IDs = requests.get(url="https://banking-opc.herokuapp.com/ids")
-IDs = json.load(client_IDs.text)
-#print(IDs)
-st.selectbox('Selectionnez un ID client',client_IDs)
+ID_dict = client_IDs.json()
+IDs = list(ID_dict.values())
+id_input = st.selectbox('Selectionnez un ID client',IDs)
 
 if st.button('Envoyez') or st.session_state.clicked: 
     st.session_state.clicked = True
