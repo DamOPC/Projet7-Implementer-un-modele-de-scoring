@@ -59,9 +59,9 @@ st.subheader("1. Prédictions de scoring client et comparaison à l'ensemble des
 client_IDs = requests.request(method='GET', url="https://banking-opc.herokuapp.com/ids")
 #did = json.loads(client_IDs.text)
 ID_dict = client_IDs.json()
-print(type(ID_dict))
-IDs = list(ID_dict.values())
-id_input = st.selectbox('Selectionnez un ID client',IDs)
+id_input = st.selectbox('Selectionnez un ID client',ID_dict)
+#IDs = list(ID_dict.values())
+#id_input = st.selectbox('Selectionnez un ID client',IDs)
 
 if st.button('Envoyez') or st.session_state.clicked: 
     st.session_state.clicked = True
