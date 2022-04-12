@@ -65,8 +65,8 @@ id_input = st.selectbox('Selectionnez un ID client',ID_dict)
 
 if st.button('Envoyez') or st.session_state.clicked: 
     st.session_state.clicked = True
-    client_id = id_input.title() 
-    client_id = int(client_id)
+    client_id = id_input
+    #client_id = int(client_id)
     #print(client_id)
     try: 
         URL = "https://banking-opc.herokuapp.com/predict"
