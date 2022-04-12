@@ -54,7 +54,8 @@ def predict():
     y_pred = estimator.predict_proba(df_pred)
     #print(type(y_pred))
     zero_proba = y_pred[0,0]
-    return str(zero_proba)
+    return json.dumps({'pred' : zero_proba})
+    #return str(zero_proba)
 
 # Routes Shap
 @app.route("/shap", methods=["POST"])
