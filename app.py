@@ -16,7 +16,7 @@ data = URL + 'api_sample.csv'
 model = URL + 'lgbm_test_model.sav'
 
 # Variables
-df = pd.read_csv(data, sep=',').drop('target', axis=1).sort_values(by='SK_ID_CURR')
+df = pd.read_csv(data, sep=',').drop('target', axis=1).sort_values(by='sk_id_curr')
 estimator = pickle.load(urllib.request.urlopen(model))
 #shap_values = 
 
@@ -29,7 +29,7 @@ def return_features():
 # Routes clients IDs
 @app.route("/ids", methods=["GET"])
 def return_ids():
-    ids = df['SK_ID_CURR']
+    ids = df['sk_id_curr']
     client_ids = ids.to_json()
     return client_ids
 
