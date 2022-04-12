@@ -69,18 +69,10 @@ if st.button('Envoyez') or st.session_state.clicked:
     #client_id = int(client_id)
     #print(client_id)
     try: 
-        URL = "https://banking-opc.herokuapp.com/predict"
-        #DICT
-        #PARAMS = {'ID': client_id}
-        #print(PARAMS)
-        #print(type(PARAMS))
-        #r = requests.post(url=URL, data=PARAMS)
-        #JSON
         pydict = {'ID': client_id}
         jsondata = json.dumps(pydict)
-        print(jsondata)
-        print(type(jsondata))
-        r = requests.post(url=URL, data=jsondata)
+        response = requests.request(method='POST', url="https://banking-opc.herokuapp.com/predict", json=jsondata)
+        #r = requests.post(url=URL, data=jsondata)
         proba = float(response.json()['pred'])
         #proba = float(r.text)
         #st.write(r.text)
