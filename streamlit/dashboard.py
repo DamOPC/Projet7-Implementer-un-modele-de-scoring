@@ -14,8 +14,6 @@ import matplotlib.pyplot as plt
 import seaborn as sns
 from PIL import Image
 
-#df = pd.read_csv("https://banking-opc.herokuapp.com/api_sample.csv")
-#dframe = df.drop('target', axis=1)
 
 if 'clicked' not in st.session_state:
     st.session_state['clicked'] = False
