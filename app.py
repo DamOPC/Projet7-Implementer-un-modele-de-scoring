@@ -2,7 +2,7 @@
 from flask import Flask, jsonify, request
 import pandas as pd
 import json
-import pickle
+import joblib
 import requests
 import urllib.request
 import shap
@@ -13,11 +13,11 @@ app = Flask(__name__)
 # Datas
 URL = 'https://raw.githubusercontent.com/DamOPC/Projet7/main/'
 data = URL + 'api_sample.csv'
-model = URL + 'lgbm_test_model.sav'
+model = URL + 'lgbm_model'
 
 # Variables
 df = pd.read_csv(data, sep=',').drop('target', axis=1).sort_values(by='sk_id_curr')
-estimator = pickle.load(urllib.request.urlopen(model))
+estimator = joblib.load(urllib.request.urlopen(model))
 #shap_values = 
 
 # Routes features
