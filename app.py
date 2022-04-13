@@ -72,10 +72,9 @@ def return_prediction(estimator=estimator):
 @app.route("/shap", methods=["GET"])
 def shap():
     df_test = df[df['sk_id_curr']==100010]
-    y_pred = estimator.predict_proba(df_test)
-    zero_proba = y_pred[0,0]
-    zero_prob = zero_proba.to_json(orient='records')
-    return zero_prob
+    y_pred2 = estimator.predict_proba(df_test)
+    zero_proba2 = y_pred2[0,0]
+    return json.dumps({'pred_test' : zero_proba2})    
 
 #lancement de l'application
 if __name__ == "__main__":
