@@ -69,9 +69,12 @@ def return_prediction(estimator=estimator):
     return json.dumps({'pred' : y_pred})    
     
 # Routes Shap
-@app.route("/shap", methods=["POST"])
+@app.route("/shap", methods=["GET"])
 def shap():
-    return("status code:", bim)
+    df_test = df[df['sk_id_curr']==100010]
+    y_pred = estimator.predict_proba(df_test)
+    zero_proba = y_pred[0,0]
+    return json.dumps({'pred' : zero_proba})
 
 #lancement de l'application
 if __name__ == "__main__":
