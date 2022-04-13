@@ -54,7 +54,7 @@ def predict():
     y_pred = estimator.predict_proba(df_pred)
     #print(type(y_pred))
     zero_proba = y_pred[0,0]
-    return json.dumps({'pred' : zero_proba})
+    return jsonify({'pred' : zero_proba})
     #return str(zero_proba)
 
 # Routes 2 proba
@@ -66,7 +66,7 @@ def return_prediction(estimator=estimator):
         y_pred = estimator.predict_proba(client_data)[:, 1][0]
     else :
         y_pred = None
-    return json.dumps({'pred' : y_pred})    
+    return jsonify(pred=y_pred)    
     
 # Routes Shap
 @app.route("/shap", methods=["GET"])
@@ -74,7 +74,7 @@ def shap():
     df_test = df[df['sk_id_curr']==100180]
     y_pred2 = estimator.predict_proba(df_test)
     zero_proba2 = y_pred2[0,0]
-    return json.dumps({'pred_test' : zero_proba2})    
+    return jsonify(pred_test=zero_proba2})    
 
 #lancement de l'application
 if __name__ == "__main__":
