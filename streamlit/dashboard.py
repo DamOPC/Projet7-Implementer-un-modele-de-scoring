@@ -79,6 +79,11 @@ if st.button('Envoyez') or st.session_state.clicked:
         #proba = float(response.json()['pred'])
     except:
         st.write("Wrong")
+        response2 = requests.get(url="https://banking-opc.herokuapp.com/shap") 
+        pred_dict = response2.json()
+        pred_test = pred_dict['pred_test']
+        st.write(pred_test)
+        
         
     # Création jauge
     fig = go.Figure(go.Indicator(
