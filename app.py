@@ -57,6 +57,17 @@ def predict():
     return json.dumps({'pred' : zero_proba})
     #return str(zero_proba)
 
+# Routes 2 proba
+@app.route('/prediction', methods=['POST'])
+def return_prediction(estimator=estimator):
+    client_id = json.loads(request.data)["client_id"]
+    client_data = df[sk_id_curr == int(client_id)]
+    if len(client_data) :
+        y_pred = estimator.predict_proba(client_data)[:, 1][0]
+    else :
+        y_pred = None
+    return json.dumps({'pred' : y_pred})    
+    
 # Routes Shap
 @app.route("/shap", methods=["POST"])
 def shap():
