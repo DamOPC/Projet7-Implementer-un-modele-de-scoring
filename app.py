@@ -44,7 +44,7 @@ def predict():
     #print(df_pred)
     #y_pred = estimator.predict_proba(df_pred)
     #JSON
-    response = json.loads(request)
+    response = request.data
     user = response['ID']
     #print(user)
     #print(type(user))
