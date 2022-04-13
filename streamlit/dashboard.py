@@ -69,20 +69,22 @@ if st.button('Envoyez') or st.session_state.clicked:
     #client_id = int(client_id)
     #print(client_id)
     try: 
-        pydict = {'ID': client_id}
-        jsondata = json.dumps(pydict)
-        response = requests.request(method='POST', url="https://banking-opc.herokuapp.com/predict", json=jsondata)
+        data_json = {'client_id': str(client_id)}
+        response = requests.request(method='POST', headers={"Content-Type": "application/json"}, url="https://banking-opc.herokuapp.com/prediction", json=data_json)
+        proba2 = float(response.json()["pred"])
+        #pydict = {'ID': client_id}
+        #jsondata = json.dumps(pydict)
+        #response = requests.request(method='POST', url="https://banking-opc.herokuapp.com/predict", json=jsondata)
         #r = requests.post(url=URL, data=jsondata)
-        proba = float(response.json()['pred'])
-        #proba = float(r.text)
-        #st.write(r.text)
+        #proba = float(response.json()['pred'])
     except:
         st.write("Wrong")
         
     # Création jauge
     fig = go.Figure(go.Indicator(
     mode = "gauge+number",
-    value = proba,
+    value = proba2,    
+    #value = proba,
     domain = {'x': [0, 1], 'y': [0, 1]},
     title = {'text': "Score"},
     gauge = { 'axis': {'range':[0,1]}}))
