@@ -35,7 +35,7 @@ def st_shap(plot, height=None):
     #return l    
     
 #Shap values de la classe 0 
-#expected_value = [-0.005649339905858291, 0.005649339905858291]
+expected_value = [-0.005649339905858291, 0.005649339905858291]
 #shap_data = 'shap_values_0.p'
 #shap_values = pickle.load(open(shap_data, 'rb'))
 
@@ -49,17 +49,12 @@ def st_shap(plot, height=None):
 #affichage formulaire
 st.title('Dashboard Scoring Credit')
 st.subheader("1. Prédictions de scoring client et comparaison à l'ensemble des clients")
-#id_input = st.text_input('Veuillez saisir l\'identifiant d\'un client:', )
-#chaine = "l'id Saisi est " + str(id_input)
-#st.write(chaine)
 
 client_IDs = requests.get(url="https://banking-opc.herokuapp.com/ids")
 #client_IDs = requests.request(method='GET', url="https://banking-opc.herokuapp.com/ids")
-#did = json.loads(client_IDs.text)
 ID_dict = client_IDs.json()
 id_input = st.selectbox('Selectionnez un ID client',ID_dict)
 #IDs = list(ID_dict.values())
-#id_input = st.selectbox('Selectionnez un ID client',IDs)
 
 if st.button('Envoyez') or st.session_state.clicked: 
     st.session_state.clicked = True
