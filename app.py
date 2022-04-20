@@ -23,6 +23,11 @@ estimator = pickle.load(urllib.request.urlopen(model))
 shap_values = pickle.load(urllib.request.urlopen(shap))
 
 # Routes features
+@app.route("/ping", methods=["GET"])
+def ping():
+    return ('pong')
+
+# Routes features
 @app.route("/features", methods=["GET"])
 def return_features():
     features_list = list(df.columns)
