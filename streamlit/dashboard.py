@@ -44,11 +44,11 @@ expected_value = [-0.005649339905858291, 0.005649339905858291]
 # Image features globales
 #image_url = r"C:\Users\Damien\Desktop\Data Scientist\P7\Images\dash3.png"
 #image_url2 = r"C:\Users\Damien\Desktop\Data Scientist\P7\Images\shap_importance.png"
-image_url = "https://banking-opc.herokuapp.com/images/dash3.png"
-image_url2 = "https://banking-opc.herokuapp.com/images/shap_importance.png"
-image_logo = Image.open(image_url)
-image_shap = Image.open(image_url2)
-st.image(image_logo)
+#image_url = "https://banking-opc.herokuapp.com/images/dash3.png"
+#image_url2 = "https://banking-opc.herokuapp.com/images/shap_importance.png"
+#image_logo = Image.open(image_url)
+#image_shap = Image.open(image_url2)
+#st.image(image_logo)
 
 
 # 1- Affichage selectbox + Jauge
