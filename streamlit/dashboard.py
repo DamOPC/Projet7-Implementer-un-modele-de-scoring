@@ -42,8 +42,8 @@ expected_value = [-0.005649339905858291, 0.005649339905858291]
 
 
 # Image features globales
-image_url = r"C:\Users\Damien\Desktop\Data Scientist\P7\Images\dash3.png"
-image_url2 = r"C:\Users\Damien\Desktop\Data Scientist\P7\Images\shap_importance.png"
+image_url = r"http://194.233.168.125/images/dash3.png"
+image_url2 = r"http://194.233.168.125/images/shap_importance.png"
 #image_url = "https://banking-opc.herokuapp.com/images/dash3.png"
 #image_url2 = "https://banking-opc.herokuapp.com/images/shap_importance.png"
 image_logo = Image.open(image_url)
@@ -56,7 +56,7 @@ st.title('Dashboard Scoring Credit')
 st.subheader("1. Prédictions de scoring client et comparaison à l'ensemble des clients")
 
 # Récuperation ID client
-client_IDs = requests.get(url="http://127.0.0.1:5000/ids")
+client_IDs = requests.get(url="http://194.233.168.125/ids")
 ID_dict = client_IDs.json()
 IDs = list(ID_dict.values())
 id_input = st.selectbox('Selectionnez un ID client',IDs)
@@ -64,7 +64,7 @@ id_input = st.selectbox('Selectionnez un ID client',IDs)
 if st.button('Envoyez') or st.session_state.clicked: 
     st.session_state.clicked = True
     client_id = id_input
-    URL = "http://127.0.0.1:5000/predict"   
+    URL = "http://194.233.168.125/predict"   
     pydict = {'ID': client_id}
     jsondata = json.dumps(pydict)
     r = requests.post(url=URL, data=jsondata)  
@@ -96,10 +96,10 @@ if st.button('Envoyez') or st.session_state.clicked:
     st.write("Conseil au chargé clientèle : Voici les variables ayant impacté la prédiction de solvabilité du client")
     
     # Récuperation top 10 features
-    features = requests.get(url="http://127.0.0.1:5000/features")
+    features = requests.get(url="http://194.233.168.125/features")
     features_list = features.json()
     # Récuperation valeurs shap
-    shap_data = requests.post(url="http://127.0.0.1:5000/shap", data=jsondata)  
+    shap_data = requests.post(url="http://194.233.168.125/shap", data=jsondata)  
     shap_list = shap_data.json()
     shap_array = np.asarray(shap_list)
     #Force plot
@@ -130,12 +130,12 @@ if st.button('Envoyez') or st.session_state.clicked:
     top_cols_json = json.dumps(top_cols) 
     
     # Récupérer df avec top 10 colonnes
-    df = requests.post(url="http://127.0.0.1:5000/dataframe", data=top_cols_json)  
+    df = requests.post(url="http://194.233.168.125/dataframe", data=top_cols_json)  
     df_test = df.json()['data']    
     dframe = pd.read_json(df_test)
     
     # Récupérer df du client avec top 10 colonnes
-    df_user_json = requests.post(url="http://127.0.0.1:5000/dataframeclient", data=jsondata)  
+    df_user_json = requests.post(url="http://194.233.168.125/dataframeclient", data=jsondata)  
     df_user_dict = df_user_json.json()['dataUser']    
     df_user = pd.read_json(df_user_dict)
     
@@ -155,7 +155,7 @@ if st.button('Envoyez') or st.session_state.clicked:
     st.subheader("5. Visualisation d'une ou plusieurs variables sélectionnées")
 
     # Récupérer df
-    df_json = requests.get(url="http://127.0.0.1:5000/df")
+    df_json = requests.get(url="http://194.233.168.125/df")
     df_dict = df_json.json()['df_graph']    
     df_tout = pd.read_json(df_dict)   
     
