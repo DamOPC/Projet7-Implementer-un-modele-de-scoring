@@ -1,5 +1,4 @@
 # Modules
-from flask import jsonify
 import requests
 import json
 import streamlit as st
