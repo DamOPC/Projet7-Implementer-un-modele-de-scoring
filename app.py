@@ -11,21 +11,16 @@ import shap
 app = Flask(__name__)
 
 # Datas
-URL = 'https://raw.githubusercontent.com/DamOPC/Projet7/main/'
-data = URL + 'api_sample.csv'
-model = URL + 'lgbm_test_model.sav'
-shap = URL + 'shap_values_0.p'
+# URL = 'http://127.0.0.1:5000/'
+data = 'api_sample.csv'
+shap = 'shap_values_0.p'
+model = 'lgbm_test_model.sav'
 
-# Chargement des variables
+# Variables
 df = pd.read_csv(data, sep=',').drop('target', axis=1).sort_values(by='sk_id_curr')
 df_graph = pd.read_csv(data, sep=',')
-estimator = pickle.load(urllib.request.urlopen(model))
-shap_values = pickle.load(urllib.request.urlopen(shap))
-
-# Routes features
-@app.route("/ping", methods=["GET"])
-def ping():
-    return ('pong')
+estimator = pickle.load(open(model, 'rb'))
+shap_values = pickle.load(open(shap, 'rb'))
 
 # Routes features
 @app.route("/features", methods=["GET"])
@@ -45,13 +40,10 @@ def return_ids():
 @app.route("/predict", methods=["POST"])
 def predict():
     user = json.loads(request.data)["ID"]
-    #print(user)
-    #print(type(user)) 
     df_pred = df[df['sk_id_curr']==user]
     y_pred = estimator.predict_proba(df_pred)
+    #Voir pour droper la clé
     zero_proba = y_pred[0,0]
-    #print(zero_proba)
-    #print(type(zero_proba))
     return json.dumps({'pred' : zero_proba})
 
 # Routes Shap
@@ -72,13 +64,9 @@ def return_df():
 # Routes DF top10
 @app.route("/dataframe", methods=["POST"])
 def return_dataframe():
-    cols = json.loads(request.data)
-    print('cols type:', type(cols))    
+    cols = json.loads(request.data) 
     df_top = df[cols]
-    print('df type:', type(df_top))
-    print('df:', df_top)  
     df_top_json = df_top.to_json()
-    print('json values type:', type(df_top_json))
     return json.dumps({'data' : df_top_json})
 
 # Routes DF client
