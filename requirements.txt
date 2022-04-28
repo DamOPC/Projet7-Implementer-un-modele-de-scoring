@@ -1,7 +1,7 @@
-django
+#django
 streamlit
-gunicorn
-django-heroku
+#gunicorn
+#django-heroku
 flask
 pandas
 numpy
