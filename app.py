@@ -13,7 +13,7 @@ app = Flask(__name__)
 # Datas
 # URL = 'http://127.0.0.1:5000/'
 data = 'api_sample.csv'
-shap = 'shap_values_0.p'
+shap = 'shap_values_1000.p'
 model = 'lgbm_test_model.sav'
 
 # Variables
