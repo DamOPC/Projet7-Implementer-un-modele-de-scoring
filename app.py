@@ -52,7 +52,11 @@ def return_shap():
     user = json.loads(request.data)["ID"]
     shap_value = shap_values[user]
     shap_list = shap_value.tolist()
+    print(shap_list)
+    print(type(shap_list))
     shap_json = json.dumps(shap_list) 
+    print(shap_json)
+    print(type(shap_json))    
     return shap_json
 
 # Routes DF
