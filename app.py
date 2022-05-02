@@ -50,6 +50,7 @@ def predict():
 def return_shap():
     user = json.loads(request.data)["ID"]
     df_user = df[df['sk_id_curr']==user]
+    print(df_user)
     shap_value = explainer.shap_values(df_user)
     shap_list = shap_value[0].tolist()
     shap_json = shap_list.to_json()
