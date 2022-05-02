@@ -30,8 +30,7 @@ def st_shap(plot, height=None):
 #Recup top colonnes
 def get_top_columns(shap_vals, f_names, num):
     l = []
-    #https://github.com/slundberg/shap/issues/632
-    for name in np.flip(np.argsort(np.abs(shap_vals))[-num:]):
+    for name in np.argsort(np.abs(shap_vals))[0,:num]:
         l.append(f_names[name])
     return l 
     
@@ -105,7 +104,7 @@ if st.button('Envoyez') or st.session_state.clicked:
     
     # Affichage waterfall
     fig, ax = plt.subplots()
-    shap.plots._waterfall.waterfall_legacy(expected_value[0], shap_array, feature_names=features_list)
+    shap.plots._waterfall.waterfall_legacy(expected_value[0], shap_array[0], feature_names=features_list)
     st.pyplot(fig, bbox_inches='tight',dpi=300,pad_inches=0)
     plt.clf()
     
