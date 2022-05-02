@@ -52,9 +52,9 @@ def return_shap():
     df_user = df[df['sk_id_curr']==user]
     shap_value = explainer.shap_values(df_user)
     shap_list = shap_value[0].tolist()
-    shap_json = json.dumps(shap_list) 
-    return shap_json
-
+    shap_json = shap_list.to_json()
+    return json.dumps({'shap_val' : shap_json})
+ 
 # Routes DF
 @app.route("/df", methods=["GET"])
 def return_df():
