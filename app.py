@@ -11,16 +11,15 @@ import shap
 app = Flask(__name__)
 
 # Datas
-# URL = 'http://127.0.0.1:5000/'
 data = 'api_sample.csv'
-shap = 'shap_values_1000.p'
 model = 'lgbm_test_model.sav'
+shap_explainer = 'shap_explainer.sav'
 
 # Variables
 df = pd.read_csv(data, sep=',').drop('target', axis=1).sort_values(by='sk_id_curr')
 df_graph = pd.read_csv(data, sep=',')
 estimator = pickle.load(open(model, 'rb'))
-shap_values = pickle.load(open(shap, 'rb'))
+explainer = pickle.load(open(shap_explainer, 'rb'))
 
 # Routes features
 @app.route("/features", methods=["GET"])
@@ -50,13 +49,10 @@ def predict():
 @app.route("/shap", methods=["POST"])
 def return_shap():
     user = json.loads(request.data)["ID"]
-    shap_value = shap_values[user]
-    shap_list = shap_value.tolist()
-    print(shap_list)
-    print(type(shap_list))
+    df_user = df[df['sk_id_curr']==user]
+    shap_value = explainer.shap_values(df_user)
+    shap_list = shap_value[0].tolist()
     shap_json = json.dumps(shap_list) 
-    print(shap_json)
-    print(type(shap_json))    
     return shap_json
 
 # Routes DF
