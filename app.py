@@ -12,14 +12,14 @@ app = Flask(__name__)
 
 # Datas
 data = 'api_sample.csv'
+data_shap = 'df_shap_0.csv'
 model = 'lgbm_test_model.sav'
-shap_explainer = 'shap_explainer.sav'
 
 # Variables
 df = pd.read_csv(data, sep=',').drop('target', axis=1).sort_values(by='sk_id_curr')
+df_shap = pd.read_csv(data_shap, sep=',').sort_values(by='sk_id_curr')
 df_graph = pd.read_csv(data, sep=',')
 estimator = pickle.load(open(model, 'rb'))
-explainer = pickle.load(open(shap_explainer, 'rb'))
 
 # Routes features
 @app.route("/features", methods=["GET"])
@@ -49,12 +49,12 @@ def predict():
 @app.route("/shap", methods=["POST"])
 def return_shap():
     user = json.loads(request.data)["ID"]
-    df_user = df[df['sk_id_curr']==user]
-    print(df_user)
-    shap_value = explainer.shap_values(df_user)
-    shap_list = shap_value[0].tolist()
-    shap_json = shap_list.to_json()
-    return json.dumps({'shap_val' : shap_json})
+    df_sha = df_shap[df_shap['sk_id_curr']==user]
+    df_sha = df_sha.drop('sk_id_curr', axis=1)
+    df_sha_arr = df_sha.to_numpy()
+    list_shap = df_sha_arr.tolist()
+    json_shap = json.dumps(list_shap)
+    return json_shap
  
 # Routes DF
 @app.route("/df", methods=["GET"])
