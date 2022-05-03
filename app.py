@@ -21,6 +21,11 @@ df_shap = pd.read_csv(data_shap, sep=',').sort_values(by='sk_id_curr')
 df_graph = pd.read_csv(data, sep=',')
 estimator = pickle.load(open(model, 'rb'))
 
+# Routes ping
+@app.route("/ping", methods=["GET"])
+def return_pong():
+    return pong
+
 # Routes features
 @app.route("/features", methods=["GET"])
 def return_features():
