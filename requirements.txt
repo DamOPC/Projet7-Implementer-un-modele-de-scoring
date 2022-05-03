@@ -1,5 +1,6 @@
 #django
 streamlit
+numba==0.51.0.
 #gunicorn
 #django-heroku
 flask
