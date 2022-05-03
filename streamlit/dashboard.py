@@ -95,9 +95,9 @@ if st.button('Envoyez') or st.session_state.clicked:
     features = requests.get(url="http://194.233.168.125/features")
     features_list = features.json()
     # Récuperation valeurs shap
-    shap_data = requests.post(url="http://194.233.168.125/shap", data=jsondata)  
-    shap_list = shap_data.json()
-    shap_array = np.asarray(shap_list)
+    json_shap = requests.post(url="http://194.233.168.125/shap", data=jsondata)  
+    shap_dict = json_shap.json()
+    shap_array = np.asarray(shap_dict)
     #Force plot
     st_shap(shap.plots.force(expected_value[0], shap_array, features_list))    
 
