@@ -42,9 +42,11 @@ expected_value = [-0.005649339905858291, 0.005649339905858291]
 # Image features globales
 #image_url = r"http://194.233.168.125/images/dash3.png"
 #image_url2 = r"http://194.233.168.125/images/shap_importance.png"
-#image_logo = Image.open(image_url)
-#image_shap = Image.open(image_url2)
-#st.image(image_logo)
+image_url = "dash3.png"
+image_url2 = "shap_importance.png"
+image_logo = Image.open(image_url)
+image_shap = Image.open(image_url2)
+st.image(image_logo)
 
 
 # 1- Affichage selectbox + Jauge
